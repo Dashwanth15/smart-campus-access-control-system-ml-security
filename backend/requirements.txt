@@ -1,3 +1,4 @@
+numpy==1.26.4
 Flask
 flask-cors
 pymongo[srv]
@@ -6,7 +7,6 @@ bcrypt
 PyJWT
 scikit-learn==1.4.2
 pandas==2.2.2
-numpy==1.26.4
 joblib
 requests
 gunicorn
