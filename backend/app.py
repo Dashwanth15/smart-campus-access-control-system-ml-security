@@ -64,12 +64,17 @@ from campus_routes import campus_bp
 # =========================
 app = Flask(__name__)
 
-# CORS — allow all origins (dev & local) with credentials
-# Using universal CORS prevents silent preflight failures that cause
-# all API data to appear as zeros in the dashboard.
+# CORS — dev origins always allowed; add Render frontend via env var
+_frontend_url = os.getenv("FRONTEND_URL", "").strip().rstrip("/")
+_cors_origins  = [
+    "http://localhost:5173", "http://localhost:3000",
+    "http://127.0.0.1:5173", "http://127.0.0.1:3000",
+]
+if _frontend_url:
+    _cors_origins.append(_frontend_url)
+
 CORS(app,
-     origins=["http://localhost:5173", "http://localhost:3000",
-              "http://127.0.0.1:5173", "http://127.0.0.1:3000"],
+     origins=_cors_origins,
      supports_credentials=True,
      allow_headers=["Content-Type", "Authorization"],
      methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
@@ -900,5 +905,7 @@ def campus_chat():
 # RUN SERVER
 # =========================
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    port = int(os.getenv("PORT", 5000))
+    debug = os.getenv("FLASK_DEBUG", "False").lower() == "true"
+    app.run(host="0.0.0.0", port=port, debug=debug)
 

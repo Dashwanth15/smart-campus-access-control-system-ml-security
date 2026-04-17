@@ -1,0 +1,44 @@
+# render.yaml — Render Blueprint
+# Defines both services so you can deploy with one click from the Render dashboard.
+# https://render.com/docs/blueprint-spec
+
+services:
+  # ── Backend Flask API ─────────────────────────────────────────────
+  - type: web
+    name: smart-campus-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: FLASK_DEBUG
+        value: "False"
+      - key: PYTHONIOENCODING
+        value: utf-8
+      - key: MONGO_URI
+        sync: false          # Fill in Render dashboard — never commit secrets
+      - key: MONGO_DB_NAME
+        value: smart_campus
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        sync: false          # Set to Render Static Site URL after frontend is deployed
+      - key: GROQ_API_KEY
+        sync: false
+
+  # ── Frontend React (Vite) Static Site ────────────────────────────
+  - type: web
+    name: smart-campus-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false          # Set to https://smart-campus-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html   # Required for React Router (SPA routing)

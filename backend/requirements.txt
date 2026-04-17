@@ -1,11 +1,13 @@
 Flask
 flask-cors
-pymongo
+pymongo[srv]
 python-dotenv
 bcrypt
 PyJWT
-scikit-learn==1.7.2
+scikit-learn==1.4.2
 pandas
 numpy
 joblib
 requests
+gunicorn
+dnspython

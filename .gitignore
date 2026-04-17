@@ -1,0 +1,68 @@
+# ============================================
+# Smart Campus Access Control — Root .gitignore
+# ============================================
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.so
+
+# --- Virtual environments ---
+venv/
+env/
+.env/
+.venv/
+
+# --- Environment / secrets ---
+*.env
+.env
+.env.*
+!.env.example
+backend/.env
+
+# --- ML model artifacts (large binaries — store in LFS or Render Disk) ---
+# Uncomment if models are large and should not be in git:
+# backend/ml/*.pkl
+# backend/ml/*.joblib
+# backend/ml/*.model
+
+# --- Test / scratch scripts (not needed in production) ---
+patch_device_status.py
+quick_test.py
+register_device.py
+test_api_direct.py
+test_backend_direct.py
+test_login.ps1
+test_login_attempts.py
+_patch_cors.py
+
+# --- Node.js ---
+node_modules/
+frontend/node_modules/
+
+# --- Vite build output ---
+frontend/dist/
+frontend/dist-ssr/
+
+# --- Logs ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- IDEs ---
+.vscode/
+.idea/
+*.suo
+*.sln
