@@ -1,0 +1,237 @@
+/* ═══════════════════════════════════════════════════════════
+   StatsOrganicTimeline — Compact Centered Branching Timeline
+   ═══════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap');
+
+/* ── Section wrapper ───────────────────────────────────── */
+.sot-section {
+    padding: 48px 16px 64px;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.sot-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+.sot-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 16px;
+    border-radius: 999px;
+    font-size: 0.63rem;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #a5b4fc;
+    border: 1px solid rgba(99,102,241,0.38);
+    background: rgba(99,102,241,0.1);
+    margin-bottom: 12px;
+}
+.sot-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 900;
+    background: linear-gradient(110deg, #f1f5f9 15%, #a5b4fc 55%, #f9a8d4 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 6px;
+    line-height: 1.1;
+}
+.sot-desc {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TREE — max-width centered container
+   ═══════════════════════════════════════════════════════════ */
+.sot-tree {
+    position: relative;
+    max-width: 960px;      /* wider → more breathing room on each side */
+    margin: 0 auto;
+    padding: 20px 0 60px;
+}
+
+/* ── Center vertical stem ───────────────────────────────── */
+.sot-stem {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 2px;
+    transform-origin: top center;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(99,102,241,0.7) 6%,
+        rgba(139,92,246,0.5) 50%,
+        rgba(99,102,241,0.4) 94%,
+        transparent
+    );
+    z-index: 1;
+}
+
+/* ── Stem dot (connection point) ────────────────────────── */
+.sot-dot {
+    position: absolute;          /* centered on stem */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(8, 12, 36, 0.9);
+    z-index: 5;
+    flex-shrink: 0;
+    /* Override left/transform since it's inside a flex row */
+    position: relative;
+    left: unset;
+    transform: none;
+    align-self: center;
+}
+.sot-dot--hidden {
+    background: transparent;
+    box-shadow: none;
+    border-color: transparent;
+}
+
+/* ── Horizontal connector ──────────────────────────────── */
+.sot-connector {
+    width: 90px;               /* slightly longer — cards breathe from stem */
+    height: 2px;
+    flex-shrink: 0;
+    transform-origin: left center;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CARD — compact, glassmorphism
+   ═══════════════════════════════════════════════════════════ */
+.sot-card {
+    width: 350px;              /* wider, more prominent */
+    flex-shrink: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(10, 15, 45, 0.78);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.10);
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.5),
+        0 24px 64px rgba(0,0,0,0.3),
+        0 0 0 1px rgba(255,255,255,0.05) inset;
+    cursor: default;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    will-change: transform;
+}
+.sot-card:hover {
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.6),
+        0 0 0 1.5px var(--acc, #6366f1),
+        0 0 40px rgba(0,0,0,0.2);
+}
+
+/* ── Image section ──────────────────────────────────────── */
+.sot-img-wrap {
+    position: relative;
+    height: 220px;             /* taller — more visual impact */
+    overflow: hidden;
+}
+.sot-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.65s ease;
+    display: block;
+    filter: brightness(1.05) contrast(1.1) saturate(1.08);
+}
+.sot-card:hover .sot-img {
+    transform: scale(1.08);
+    filter: brightness(1.1) contrast(1.12) saturate(1.12);
+}
+.sot-img-grad {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* Floating icon (overlaps image bottom edge) */
+.sot-icon {
+    position: absolute;
+    bottom: -20px;
+    left: 18px;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.45rem;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    z-index: 4;
+}
+
+/* ── Text body ──────────────────────────────────────────── */
+.sot-body {
+    padding: 28px 20px 18px;   /* more breathing room */
+    position: relative;
+}
+.sot-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.6rem;         /* larger, more impactful */
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1;
+    margin-bottom: 6px;
+    text-shadow: 0 0 32px currentColor, 0 2px 8px rgba(0,0,0,0.5);
+}
+.sot-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #f1f5f9;
+    margin-bottom: 5px;
+}
+.sot-sub {
+    font-size: 0.74rem;
+    color: rgba(148,163,184,0.78);
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+.sot-bar {
+    height: 2px;
+    border-radius: 999px;
+    width: 50%;
+    opacity: 0.65;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — single column on mobile
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+    .sot-stem,
+    .sot-connector,
+    .sot-dot { display: none; }
+
+    /* On mobile each node row stacks vertically */
+    .sot-tree > div {
+        flex-direction: column !important;
+        align-items: center !important;
+        margin-top: 20px !important;
+    }
+    .sot-tree > div > div {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 0 !important;
+    }
+    .sot-card {
+        width: min(350px, 90vw);
+    }
+}

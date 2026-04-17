@@ -1,0 +1,148 @@
+// ─── Static fees data for all programs ──────────────────────────────────────
+export const FEES_DATA = {
+    cse: {
+        slug: 'cse',
+        name: 'B.Tech Computer Science',
+        shortName: 'B.Tech CSE',
+        icon: '💻',
+        duration: '4 Years',
+        heroImg: '/images/prog_cse.png',
+        color: '#60a5fa',
+        tagline: 'Build the future with code — AI, Cloud, Cybersecurity & more',
+        annual_fee: 150000,
+        hostel_fee: 80000,
+        other_charges: 20000,
+        yearWise: [
+            { year: 'Year 1', tuition: 150000, hostel: 80000, other: 25000 },
+            { year: 'Year 2', tuition: 150000, hostel: 80000, other: 20000 },
+            { year: 'Year 3', tuition: 155000, hostel: 82000, other: 20000 },
+            { year: 'Year 4', tuition: 155000, hostel: 82000, other: 18000 },
+        ],
+        highlights: [
+            { icon: '🤖', title: 'AI & ML', desc: 'Dedicated AI/ML labs with GPU clusters' },
+            { icon: '☁️', title: 'Cloud Computing', desc: 'AWS/Azure certified curriculum' },
+            { icon: '🔐', title: 'Cybersecurity', desc: 'Ethical hacking and security labs' },
+            { icon: '📱', title: 'App Development', desc: 'iOS/Android development track' },
+            { icon: '📊', title: 'Data Science', desc: 'Industry-relevant data analytics' },
+            { icon: '🌐', title: 'Full Stack Web', desc: 'Modern web development stack' },
+        ],
+        careers: ['Software Engineer', 'Data Scientist', 'AI Engineer', 'Cloud Architect', 'Product Manager', 'Full Stack Developer'],
+        placement: { avg: '₹12 LPA', highest: '₹28 LPA', rate: '98%', topCompanies: ['Google', 'Microsoft', 'Amazon', 'Infosys', 'TCS'] },
+        gallery: ['/images/prog_cse.png', '/images/fac_computer_labs.png', '/images/fac_academic_hub.png'],
+    },
+
+    electronics: {
+        slug: 'electronics',
+        name: 'B.Tech Electronics',
+        shortName: 'B.Tech ECE',
+        icon: '⚡',
+        duration: '4 Years',
+        heroImg: '/images/prog_electronics.png',
+        color: '#f59e0b',
+        tagline: 'Design tomorrow\'s hardware — VLSI, Embedded Systems & IoT',
+        annual_fee: 140000,
+        hostel_fee: 80000,
+        other_charges: 20000,
+        yearWise: [
+            { year: 'Year 1', tuition: 140000, hostel: 80000, other: 22000 },
+            { year: 'Year 2', tuition: 140000, hostel: 80000, other: 20000 },
+            { year: 'Year 3', tuition: 145000, hostel: 82000, other: 20000 },
+            { year: 'Year 4', tuition: 145000, hostel: 82000, other: 18000 },
+        ],
+        highlights: [
+            { icon: '🔬', title: 'VLSI Design', desc: 'Chip design with Cadence & Synopsys tools' },
+            { icon: '📡', title: 'Communication', desc: '5G, RF & antenna design labs' },
+            { icon: '🤖', title: 'Embedded Systems', desc: 'ARM, Arduino & FPGA programming' },
+            { icon: '🌐', title: 'IoT', desc: 'Internet of Things prototyping lab' },
+            { icon: '📷', title: 'Signal Processing', desc: 'Image and audio DSP projects' },
+            { icon: '⚙️', title: 'Control Systems', desc: 'Automation and robotics integration' },
+        ],
+        careers: ['VLSI Engineer', 'Embedded Systems Dev', 'RF Engineer', 'IoT Developer', 'Telecom Engineer', 'Hardware Designer'],
+        placement: { avg: '₹9 LPA', highest: '₹22 LPA', rate: '94%', topCompanies: ['Qualcomm', 'Intel', 'Samsung', 'DRDO', 'ISRO'] },
+        gallery: ['/images/prog_electronics.png', '/images/fac_computer_labs.png', '/images/campus.png'],
+    },
+
+    mechanical: {
+        slug: 'mechanical',
+        name: 'B.Tech Mechanical',
+        shortName: 'B.Tech Mech',
+        icon: '⚙️',
+        duration: '4 Years',
+        heroImg: '/images/prog_mechanical.png',
+        color: '#34d399',
+        tagline: 'Engineer the physical world — CAD/CAM, Robotics & Manufacturing',
+        annual_fee: 135000,
+        hostel_fee: 80000,
+        other_charges: 20000,
+        yearWise: [
+            { year: 'Year 1', tuition: 135000, hostel: 80000, other: 22000 },
+            { year: 'Year 2', tuition: 135000, hostel: 80000, other: 20000 },
+            { year: 'Year 3', tuition: 138000, hostel: 82000, other: 20000 },
+            { year: 'Year 4', tuition: 138000, hostel: 82000, other: 18000 },
+        ],
+        highlights: [
+            { icon: '🖥️', title: 'CAD/CAM', desc: 'CATIA, SolidWorks & AutoCAD labs' },
+            { icon: '🤖', title: 'Robotics', desc: 'Industrial robot programming & simulation' },
+            { icon: '🏭', title: 'Manufacturing', desc: 'CNC machining & 3D printing workshop' },
+            { icon: '🔥', title: 'Thermal Engg', desc: 'Heat transfer and fluid mechanics labs' },
+            { icon: '🚗', title: 'Automobile', desc: 'EV and hybrid vehicle specialisation' },
+            { icon: '✈️', title: 'Aero Design', desc: 'Aerodynamics simulation & wind tunnel' },
+        ],
+        careers: ['Mechanical Design Engineer', 'Robotics Engineer', 'Manufacturing Engineer', 'Automotive Engineer', 'HVAC Engineer', 'R&D Engineer'],
+        placement: { avg: '₹8 LPA', highest: '₹18 LPA', rate: '91%', topCompanies: ['TATA Motors', 'L&T', 'Mahindra', 'BHEL', 'Bosch'] },
+        gallery: ['/images/prog_mechanical.png', '/images/fac_sports.png', '/images/campus.png'],
+    },
+
+    mtech: {
+        slug: 'mtech',
+        name: 'M.Tech (All Branches)',
+        shortName: 'M.Tech',
+        icon: '🎓',
+        duration: '2 Years',
+        heroImg: '/images/prog_mtech.png',
+        color: '#c084fc',
+        tagline: 'Advance your expertise — Research, Innovation & Leadership',
+        annual_fee: 100000,
+        hostel_fee: 80000,
+        other_charges: 15000,
+        yearWise: [
+            { year: 'Year 1', tuition: 100000, hostel: 80000, other: 18000 },
+            { year: 'Year 2', tuition: 100000, hostel: 80000, other: 15000 },
+        ],
+        highlights: [
+            { icon: '🔬', title: 'Research Focus', desc: 'Dedicated thesis and research projects' },
+            { icon: '🏛️', title: 'Industry Collab', desc: 'Live projects with industry partners' },
+            { icon: '📜', title: 'Publications', desc: 'Support for IEEE/Scopus journal papers' },
+            { icon: '💡', title: 'Innovation Lab', desc: 'Patent filing assistance available' },
+            { icon: '👨‍🏫', title: 'Expert Faculty', desc: 'PhD faculty with active research profiles' },
+            { icon: '🌍', title: 'Conference Travel', desc: 'Financial aid for paper presentations' },
+        ],
+        careers: ['Research Scientist', 'Senior Engineer', 'University Faculty', 'Tech Lead', 'R&D Manager', 'PhD (Gateway)'],
+        placement: { avg: '₹14 LPA', highest: '₹32 LPA', rate: '96%', topCompanies: ['DRDO', 'ISRO', 'Google', 'Microsoft Research', 'IITs'] },
+        gallery: ['/images/prog_mtech.png', '/images/fac_academic_hub.png', '/images/library.jpg'],
+    },
+};
+
+// Ordered list for the grid
+export const PROGRAM_LIST = [
+    FEES_DATA.cse,
+    FEES_DATA.electronics,
+    FEES_DATA.mechanical,
+    FEES_DATA.mtech,
+];
+
+// Shared scholarships and payment data
+export const SHARED_FEES = {
+    scholarships: [
+        { icon: '🏆', title: 'Merit Scholarship', desc: 'Up to 50% tuition waiver for top rankers' },
+        { icon: '⚽', title: 'Sports Quota', desc: 'Fee concession for state/national level athletes' },
+        { icon: '🏛️', title: 'Government Schemes', desc: 'SC/ST/OBC and EWS scholarship support' },
+        { icon: '💡', title: 'Innovation Award', desc: 'Full scholarship for patent holders' },
+    ],
+    paymentModes: [
+        { icon: '📱', title: 'Online Payment', desc: 'UPI, Net Banking, Debit/Credit Cards' },
+        { icon: '🏦', title: 'Bank Transfer', desc: 'NEFT/RTGS directly to institute account' },
+        { icon: '📋', title: 'DD / Cheque', desc: 'Demand Draft in favour of the institute' },
+        { icon: '📅', title: 'Semester EMI', desc: 'Pay in 2 installments per semester' },
+    ],
+};

@@ -1,0 +1,225 @@
+/* ══════════════════════════════════════════════════════
+   HeroSection  –  Full-width, min-screen-height hero
+   Scoped to .hs-* to avoid any collision with gd-hero*
+   ══════════════════════════════════════════════════════ */
+
+/* ── Root ─────────────────────────────────────────── */
+.hs-root {
+    /* Break out of gd-wrap's padding */
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+
+    height: 65vh;
+    min-height: 420px;
+    max-height: 680px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* ── Background image ─────────────────────────────── */
+.hs-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    /* Subtle slow zoom on mount */
+    animation: hs-zoom 18s ease forwards;
+    will-change: transform;
+    /* Boost image so it punches through the lighter overlay */
+    filter: brightness(1.12) contrast(1.06) saturate(1.08);
+}
+
+@keyframes hs-zoom {
+    from { transform: scale(1.06); }
+    to   { transform: scale(1.00); }
+}
+
+/* ── Overlay – very light so the image breathes ─────────── */
+.hs-overlay {
+    position: absolute;
+    inset: 0;
+    /* ~25% darkness total: top-to-bottom gradient
+       top is slightly darker for header legibility,
+       centre is open so the campus photo shows clearly */
+    background:
+        linear-gradient(180deg,
+            rgba(5, 4, 20, 0.45) 0%,
+            rgba(5, 4, 20, 0.18) 40%,
+            rgba(5, 4, 20, 0.28) 100%);
+}
+
+/* ── Content wrapper ──────────────────────────────── */
+.hs-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.15rem;
+    /* No max-width clamp → stays truly full-width centred */
+    width: 100%;
+    max-width: 860px;
+
+    /* Fade+slide in on load */
+    animation: hs-appear 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hs-appear {
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Badge ────────────────────────────────────────── */
+.hs-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 5px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+/* ── Title – solid white for maximum contrast ─────── */
+.hs-title {
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    margin: 0;
+    letter-spacing: -1.5px;
+    color: #ffffff;
+    /* Strong shadow so text always reads against any part of the photo */
+    text-shadow:
+        0 2px 4px  rgba(0, 0, 0, 0.90),
+        0 6px 24px rgba(0, 0, 0, 0.70),
+        0 0  48px  rgba(99, 102, 241, 0.35);
+}
+
+/* ── Subtitle ─────────────────────────────────────── */
+.hs-subtitle {
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.93);
+    max-width: 580px;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.70);
+}
+
+/* ── Glass text box ──────────────────────────────── */
+.hs-text-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1.6rem 2.4rem;
+    border-radius: 20px;
+    background: rgba(5, 4, 20, 0.30);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.30);
+    max-width: 680px;
+    width: 100%;
+}
+
+/* ── CTA button ───────────────────────────────────── */
+.hs-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 14px 34px;
+    border-radius: 999px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+
+    /* Vibrant indigo-violet gradient */
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 60%, #a78bfa 100%);
+    color: #fff;
+    box-shadow:
+        0 8px 32px rgba(99, 102, 241, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.10) inset;
+
+    transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+
+.hs-cta:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow:
+        0 14px 42px rgba(99, 102, 241, 0.70),
+        0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+    filter: brightness(1.08);
+}
+
+.hs-cta:active {
+    transform: translateY(-1px) scale(1.00);
+}
+
+/* ── Scroll-down cue ──────────────────────────────── */
+.hs-scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+.hs-scroll-cue span {
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-right: 2.5px solid rgba(255, 255, 255, 0.55);
+    border-bottom: 2.5px solid rgba(255, 255, 255, 0.55);
+    transform: rotate(45deg);
+    animation: hs-bounce 1.6s ease infinite;
+}
+
+@keyframes hs-bounce {
+    0%, 100% { transform: rotate(45deg) translateY(0);   opacity: 0.5; }
+    50%       { transform: rotate(45deg) translateY(6px); opacity: 1;   }
+}
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 768px) {
+    .hs-root {
+        min-height: 100svh;
+    }
+    .hs-content {
+        gap: 1rem;
+        padding: 2rem 1rem;
+    }
+    .hs-cta {
+        padding: 12px 28px;
+        font-size: 0.88rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hs-title {
+        letter-spacing: -0.5px;
+    }
+}

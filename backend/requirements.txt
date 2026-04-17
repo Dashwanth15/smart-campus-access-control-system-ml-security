@@ -1,0 +1,11 @@
+Flask
+flask-cors
+pymongo
+python-dotenv
+bcrypt
+PyJWT
+scikit-learn==1.7.2
+pandas
+numpy
+joblib
+requests

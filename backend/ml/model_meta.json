@@ -1,0 +1,18 @@
+{
+  "features": [
+    "device_known",
+    "login_hour",
+    "failed_attempts",
+    "ip_change",
+    "browser_change",
+    "login_frequency"
+  ],
+  "label_classes": [
+    "Allowed",
+    "Blocked",
+    "Restricted"
+  ],
+  "rf_accuracy": 1.0,
+  "svm_accuracy": 0.9933,
+  "trained_at": "2026-04-04T17:22:24.694065+00:00"
+}

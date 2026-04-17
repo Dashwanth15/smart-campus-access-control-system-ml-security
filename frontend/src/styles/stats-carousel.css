@@ -1,0 +1,358 @@
+/* ════════════════════════════════════════════════════════
+   StatsCarousel v2 — Netflix / Apple-style Premium UI
+   ════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap');
+
+/* ── Section wrapper ───────────────────────────────────── */
+.sc2-section {
+    padding: 40px 0 28px;
+    position: relative;
+    overflow: hidden; /* keeps glow inside */
+}
+
+/* Ambient background glow */
+.sc2-section::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(99,102,241,0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── Header ────────────────────────────────────────────── */
+.sc2-header {
+    text-align: center;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+}
+
+.sc2-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 16px;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #a5b4fc;
+    border: 1px solid rgba(99,102,241,0.35);
+    background: rgba(99,102,241,0.1);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.sc2-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 900;
+    background: linear-gradient(100deg, #f1f5f9 20%, #a5b4fc 55%, #f9a8d4 85%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 8px;
+    line-height: 1.15;
+}
+
+.sc2-desc {
+    font-size: 0.82rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* ── Outer row (arrows + track) ───────────────────────── */
+.sc2-outer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+/* ── SCROLLABLE TRACK ─────────────────────────────────── */
+.sc2-track {
+    display: flex;
+    flex-direction: row;        /* horizontal */
+    flex-wrap: nowrap;          /* never wrap */
+    gap: 20px;
+    overflow-x: scroll;         /* THE KEY: horizontal scroll */
+    overflow-y: visible;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    padding: 24px 0 32px;
+    flex: 1;
+
+    /* Hide scrollbar everywhere */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.sc2-track::-webkit-scrollbar { display: none; }
+.sc2-track.sc2-dragging { cursor: grabbing; scroll-behavior: auto; }
+
+/* Leading/trailing spacers create the "peek" effect */
+.sc2-spacer {
+    flex-shrink: 0;
+    width: 28px;                /* breathing room from edge */
+}
+
+/* ── STAT CARD ────────────────────────────────────────── */
+.sc2-card {
+    flex: 0 0 340px;            /* FIXED width — key for scroll */
+    width: 340px;
+    height: 420px;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+    border: 1px solid rgba(255,255,255,0.08);
+    will-change: transform;
+    transform-style: preserve-3d;
+    box-shadow:
+        0 4px 24px rgba(0,0,0,0.4),
+        0 1px 0 rgba(255,255,255,0.06) inset;
+    transition: box-shadow 0.35s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Card hover: reveal glow ring + deeper shadow */
+.sc2-card:hover {
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,0.12),
+        0 24px 60px rgba(0,0,0,0.55),
+        0 0 60px var(--glow, rgba(99,102,241,0.25));
+}
+
+/* ── Card: background image ──── */
+.sc2-card-img-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.sc2-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    will-change: transform;
+}
+
+.sc2-card:hover .sc2-card-img {
+    transform: scale(1.12);
+}
+
+/* ── Card: gradient overlay ──── */
+.sc2-card-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: 24px;
+}
+
+/* ── Card: glow ring (hover only) ──── */
+.sc2-glow-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    box-shadow: 0 0 0 2px var(--glow, rgba(99,102,241,0.5)) inset;
+}
+
+.sc2-card:hover .sc2-glow-ring {
+    opacity: 1;
+}
+
+/* ── Card body (all content) ──── */
+.sc2-card-body {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 24px;
+    text-align: center;
+    gap: 0;
+}
+
+/* ── Top badge ──── */
+.sc2-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid;
+    backdrop-filter: blur(8px);
+}
+
+/* ── Floating icon ──── */
+.sc2-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 18px;
+    box-shadow:
+        0 8px 24px rgba(0,0,0,0.4),
+        0 1px 0 rgba(255,255,255,0.2) inset;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+}
+
+/* ── Animated number ──── */
+.sc2-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+    text-shadow: 0 0 30px currentColor, 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* ── Label ──── */
+.sc2-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: #f1f5f9;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* ── Sub text ──── */
+.sc2-sub {
+    font-size: 0.72rem;
+    color: rgba(241,245,249,0.6);
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+
+/* ── Bottom accent bar ──── */
+.sc2-accent-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    opacity: 0.8;
+    border-radius: 0 0 24px 24px;
+}
+
+/* ── Arrow buttons ────────────────────────────────────── */
+.sc2-arrow {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(15,23,42,0.9);
+    border: 1px solid rgba(248,250,252,0.15);
+    color: #f1f5f9;
+    font-size: 1.7rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    position: relative;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+    transition: background 0.2s, border-color 0.2s, opacity 0.25s;
+    margin: 0 6px;
+}
+
+.sc2-arrow:hover {
+    background: rgba(99,102,241,0.4);
+    border-color: rgba(99,102,241,0.6);
+}
+
+.sc2-arrow-off {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ── Drag hint ────────────────────────────────────────── */
+.sc2-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 6px;
+    font-size: 0.68rem;
+    color: #475569;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+}
+
+.sc2-hint-dots {
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #475569);
+}
+.sc2-hint-dots:last-child {
+    background: linear-gradient(90deg, #475569, transparent);
+}
+
+/* ── Scroll dots ──────────────────────────────────────── */
+.sc2-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.sc2-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(100,116,139,0.5);
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 900px) {
+    .sc2-card {
+        flex: 0 0 280px;
+        width: 280px;
+        height: 360px;
+    }
+    .sc2-num { font-size: 2.4rem; }
+    .sc2-arrow { display: none; }
+}
+
+@media (max-width: 540px) {
+    .sc2-card {
+        flex: 0 0 240px;
+        width: 240px;
+        height: 320px;
+    }
+    .sc2-num { font-size: 2rem; }
+    .sc2-icon { width: 52px; height: 52px; font-size: 1.4rem; }
+    .sc2-section { padding: 24px 0 16px; }
+}

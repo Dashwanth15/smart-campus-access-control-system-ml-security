@@ -1,0 +1,268 @@
+/* ============================================================
+   device-dashboard.css
+   Styles for DeviceDashboard + UserCard components
+   ============================================================ */
+
+/* ── UserCard ─────────────────────────────────────────────────── */
+.uc-card {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color .2s, box-shadow .2s;
+    margin-bottom: .5rem;
+}
+.uc-card--open {
+    box-shadow: 0 6px 24px rgba(0,0,0,.25);
+}
+.uc-card:hover {
+    border-color: rgba(99,102,241,.3);
+}
+
+/* ── Header row ───────────────────────────────────────────────── */
+.uc-header {
+    display: grid;
+    grid-template-columns:
+        40px         /* avatar */
+        minmax(0,1.6fr) /* identity */
+        80px         /* role */
+        48px         /* device count */
+        110px        /* risk bar */
+        120px        /* status */
+        110px        /* last login */
+        24px;        /* chevron */
+    align-items: center;
+    gap: .65rem;
+    padding: .75rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background .15s;
+}
+.uc-header:hover { background: rgba(255,255,255,.03); }
+
+/* Avatar */
+.uc-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: .95rem; color: #fff;
+    flex-shrink: 0;
+}
+
+/* Identity */
+.uc-identity {
+    display: flex; flex-direction: column; gap: 1px; overflow: hidden;
+}
+.uc-name {
+    font-size: .82rem; font-weight: 600; color: #e2e8f0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.uc-email {
+    font-size: .68rem; color: #64748b;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Role */
+.uc-role {
+    padding: 2px 8px; border-radius: 999px;
+    font-size: .65rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .3px; text-align: center;
+}
+.uc-role--admin   { background: rgba(139,92,246,.15); color: #a78bfa; }
+.uc-role--student { background: rgba(59,130,246,.12); color: #93c5fd; }
+.uc-role--faculty { background: rgba(16,185,129,.12); color: #6ee7b7; }
+.uc-role--guest   { background: rgba(245,158,11,.12); color: #fcd34d; }
+
+/* Device count */
+.uc-devcount {
+    font-size: .76rem; color: #94a3b8; text-align: center;
+}
+
+/* Risk mini-bar */
+.uc-risk-mini { display: flex; align-items: center; gap: 5px; }
+.uc-risk-bg   { flex: 1; height: 5px; background: rgba(255,255,255,.08); border-radius: 99px; overflow: hidden; }
+.uc-risk-fill { height: 100%; border-radius: 99px; transition: width .5s; }
+.uc-risk-wrap { display: flex; align-items: center; }
+
+/* Status pill */
+.uc-status-pill {
+    padding: 3px 10px; border-radius: 999px;
+    font-size: .68rem; font-weight: 700; text-align: center;
+    white-space: nowrap;
+}
+
+/* Last login */
+.uc-last-login { font-size: .7rem; color: #64748b; white-space: nowrap; }
+
+/* Chevron */
+.uc-chevron {
+    font-size: 1rem; color: #475569; text-align: center;
+    transition: transform .25s cubic-bezier(.22,1,.36,1);
+    line-height: 1;
+}
+.uc-chevron--up { transform: rotate(180deg); }
+
+/* ── Expanded body ────────────────────────────────────────────── */
+.uc-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s cubic-bezier(.22,1,.36,1);
+}
+.uc-body--open { max-height: 1000px; }
+
+/* Device list */
+.uc-device-list {
+    padding: 0 1rem .5rem;
+    display: flex; flex-direction: column; gap: .3rem;
+}
+.uc-device-list-header {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr 160px;
+    gap: .5rem;
+    padding: .35rem .75rem;
+    font-size: .62rem; font-weight: 700; color: #475569;
+    text-transform: uppercase; letter-spacing: .4px;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    margin-bottom: .2rem;
+}
+
+/* Single device row */
+.uc-device-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr 160px;
+    gap: .5rem;
+    padding: .5rem .75rem;
+    background: rgba(255,255,255,.025);
+    border-radius: 8px;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,.04);
+    transition: background .15s;
+}
+.uc-device-row:hover { background: rgba(255,255,255,.05); }
+
+.uc-dr-left  { display: flex; flex-direction: column; gap: 2px; }
+.uc-dr-id    { font-family: monospace; font-size: .72rem; color: #94a3b8; }
+.uc-dr-browser { font-size: .7rem; color: #64748b; }
+
+.uc-dr-meta  { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
+.uc-dr-chip  {
+    padding: 2px 7px; background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.07); border-radius: 6px;
+    font-size: .67rem; color: #94a3b8; white-space: nowrap;
+}
+
+.uc-dr-right { display: flex; flex-direction: column; gap: .3rem; align-items: flex-end; }
+.uc-dr-status {
+    padding: 2px 9px; border-radius: 999px;
+    font-size: .65rem; font-weight: 700; white-space: nowrap;
+}
+
+/* Aggregate stats row */
+.uc-stats-row {
+    display: flex; gap: .5rem; flex-wrap: wrap;
+    padding: .6rem 1rem .85rem;
+    border-top: 1px solid rgba(255,255,255,.05);
+}
+.uc-stat-chip {
+    display: flex; align-items: center; gap: .3rem;
+    padding: .3rem .65rem;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 8px;
+}
+.uc-stat-icon  { font-size: .8rem; }
+.uc-stat-val   { font-size: .8rem; font-weight: 700; color: #e2e8f0; }
+.uc-stat-label { font-size: .62rem; color: #64748b; }
+
+/* No devices message */
+.uc-no-devices {
+    padding: 1rem;
+    font-size: .8rem; color: #475569;
+    display: flex; align-items: center; gap: .4rem;
+}
+
+/* ============================================================
+   DeviceDashboard — wrapper & controls
+   ============================================================ */
+.dd-wrap {
+    display: flex; flex-direction: column; gap: 1rem;
+}
+
+/* Summary bar */
+.dd-summary {
+    display: flex; gap: .65rem; flex-wrap: wrap;
+}
+.dd-chip {
+    display: flex; align-items: center; gap: .45rem;
+    padding: .5rem 1.1rem; border-radius: 12px;
+    font-size: .8rem;
+}
+
+/* Toolbar: search + filter */
+.dd-toolbar {
+    display: flex; align-items: center; gap: .65rem; flex-wrap: wrap;
+}
+.dd-search {
+    flex: 1; min-width: 200px; max-width: 340px;
+    padding: .5rem .9rem;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px;
+    color: #e2e8f0; font-size: .83rem; outline: none;
+    transition: border-color .2s;
+}
+.dd-search:focus { border-color: #6366f1; }
+.dd-search::placeholder { color: rgba(255,255,255,.25); }
+
+.dd-filter {
+    padding: .5rem .85rem;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px;
+    color: #e2e8f0; font-size: .83rem; outline: none;
+    cursor: pointer; transition: border-color .2s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2364748b'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right .7rem center;
+    padding-right: 2rem;
+}
+.dd-filter:focus { border-color: #6366f1; }
+.dd-filter option { background: #1e293b; }
+
+.dd-count {
+    font-size: .78rem; color: #64748b; white-space: nowrap;
+}
+
+/* Empty state */
+.dd-empty {
+    display: flex; flex-direction: column; align-items: center;
+    gap: .5rem; padding: 3rem 1rem;
+    color: rgba(255,255,255,.25); font-size: .85rem;
+}
+.dd-empty span { font-size: 2rem; }
+
+/* List container */
+.dd-list { display: flex; flex-direction: column; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .uc-header {
+        grid-template-columns: 38px 1fr 70px 40px 90px 100px 28px;
+    }
+    .uc-last-login { display: none; }
+    .uc-device-list-header,
+    .uc-device-row { grid-template-columns: 160px 1fr 130px; }
+    .uc-device-list-header span:nth-child(3),
+    .uc-device-row .uc-dr-meta { display: none; }
+}
+@media (max-width: 640px) {
+    .uc-header {
+        grid-template-columns: 36px 1fr 70px 90px 24px;
+    }
+    .uc-devcount, .uc-risk-wrap { display: none; }
+    .dd-toolbar { flex-direction: column; align-items: stretch; }
+    .dd-search, .dd-filter { max-width: 100%; }
+    .uc-device-list-header,
+    .uc-device-row { grid-template-columns: 1fr 1fr; }
+}

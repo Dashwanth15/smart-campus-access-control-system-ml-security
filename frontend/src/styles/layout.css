@@ -1,0 +1,44 @@
+/* ===================================
+   Layout Styles
+   =================================== */
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    display: flex;
+    flex-direction: column;
+    transition: margin-left var(--transition-base);
+}
+
+.layout.sidebar-collapsed .main-content {
+    margin-left: var(--sidebar-collapsed);
+}
+
+.page-content {
+    flex: 1;
+    padding: 0;           /* each page component handles its own padding */
+    overflow-y: auto;
+    overflow-x: hidden;   /* prevent horizontal scroll bleed from tables */
+    background: var(--gradient-glow);
+    background-attachment: fixed;
+    min-width: 0;         /* flex child overflow fix */
+    /* Ensure content is always scrollable within boundary */
+    position: relative;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+    }
+
+    .layout.sidebar-collapsed .main-content {
+        margin-left: 0;
+    }
+}

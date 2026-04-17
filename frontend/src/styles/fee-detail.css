@@ -1,0 +1,442 @@
+/* ════════════════════════════════════════════════════════
+   FeeDetail — Premium Program Fee Page
+   ════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap');
+
+.fdb-root {
+    position: relative;
+    min-height: 100vh;
+    background: var(--bg-primary, #0a0e27);
+    animation: fdb-in 0.35s ease;
+}
+@keyframes fdb-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Back button ─────────────────────────────────────────── */
+.fdb-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 16px 0 0 20px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(10,14,40,0.85);
+    backdrop-filter: blur(12px);
+    color: #e2e8f0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+    transition: background 0.2s, border-color 0.2s;
+}
+.fdb-back-btn:hover {
+    background: rgba(99,102,241,0.25);
+    border-color: rgba(99,102,241,0.5);
+    color: #fff;
+}
+
+/* ══ HERO ═══════════════════════════════════════════════════ */
+.fdb-hero {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    margin-top: 12px;
+}
+.fdb-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(1.05) contrast(1.08);
+    display: block;
+}
+.fdb-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+.fdb-hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 36px 44px;
+}
+.fdb-hero-icon {
+    width: 60px; height: 60px;
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 14px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+}
+.fdb-hero-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    font-weight: 900;
+    color: #fff;
+    margin: 0 0 8px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    line-height: 1.1;
+}
+.fdb-hero-tag {
+    font-size: 0.88rem;
+    color: rgba(241,245,249,0.78);
+    margin: 0 0 14px;
+    max-width: 540px;
+    line-height: 1.5;
+}
+.fdb-hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.fdb-pill {
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.14);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #f1f5f9;
+}
+.fdb-hero-bar {
+    height: 3px;
+    width: 80px;
+    border-radius: 999px;
+}
+
+/* ══ BODY ════════════════════════════════════════════════════ */
+.fdb-body {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+}
+
+/* ── Section ─────────────────────────────────────────────── */
+.fdb-section { margin-bottom: 56px; }
+.fdb-section-label {
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+.fdb-section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 800;
+    color: var(--text-primary, #f1f5f9);
+    margin: 0 0 24px;
+}
+.fdb-section-sub {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+/* ── Summary cards (4 boxes) ─────────────────────────────── */
+.fdb-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 28px;
+}
+.fdb-summary-card {
+    background: var(--card-bg, rgba(15,20,50,0.7));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-top: 3px solid var(--sc, #6366f1);
+    border-radius: 16px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    transition: box-shadow 0.25s;
+}
+.fdb-summary-card--big {
+    background: linear-gradient(135deg, rgba(236,72,153,0.12), rgba(15,20,50,0.8));
+    border-top-width: 3px;
+    border-color: rgba(236,72,153,0.4);
+}
+.fdb-summary-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+.fdb-summary-icon { font-size: 1.5rem; margin-bottom: 6px; }
+.fdb-summary-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+.fdb-summary-amt {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+}
+
+/* ── Proportional bars ───────────────────────────────────── */
+.fdb-bars { display: flex; flex-direction: column; gap: 14px; }
+/* fee bar row wrapper */
+.fdb-bar-row { display: flex; flex-direction: column; }
+
+.fdb-bar-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+.fdb-bar-icon { font-size: 1rem; }
+.fdb-bar-label {
+    flex: 1;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-primary, #f1f5f9);
+}
+.fdb-bar-amt {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--text-secondary, #94a3b8);
+}
+.fdb-bar-track {
+    height: 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 999px;
+    overflow: hidden;
+}
+.fdb-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+}
+
+/* ── Year-wise table ─────────────────────────────────────── */
+.fdb-year-table {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color, rgba(255,255,255,0.08));
+}
+.fdb-year-head {
+    display: grid;
+    grid-template-columns: 1.2fr repeat(4, 1fr);
+    padding: 10px 16px;
+    background: rgba(99,102,241,0.12);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #94a3b8;
+}
+.fdb-year-row {
+    display: grid;
+    grid-template-columns: 1.2fr repeat(4, 1fr);
+    padding: 12px 16px;
+    border-top: 1px solid var(--border-color, rgba(255,255,255,0.06));
+    background: var(--card-bg, rgba(15,20,50,0.5));
+    font-size: 0.8rem;
+    color: var(--text-primary, #f1f5f9);
+    transition: background 0.2s;
+}
+.fdb-year-row:hover { background: rgba(99,102,241,0.07); }
+.fdb-year-label {
+    font-weight: 700;
+    color: var(--yc, #6366f1) !important;
+}
+.fdb-year-total { font-weight: 800; }
+.fdb-year-grand {
+    display: grid;
+    grid-template-columns: 1.2fr repeat(4, 1fr);
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border-top: 2px solid rgba(255,255,255,0.1);
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--text-primary, #f1f5f9);
+}
+
+/* ── Scholarships ────────────────────────────────────────── */
+.fdb-schol-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+.fdb-schol-card {
+    background: var(--card-bg, rgba(15,20,50,0.7));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 3px solid var(--sc, #6366f1);
+    border-radius: 16px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    cursor: default;
+    transition: box-shadow 0.25s;
+}
+.fdb-schol-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,.3); }
+.fdb-schol-icon { font-size: 1.8rem; margin-bottom: 8px; }
+.fdb-schol-title {
+    font-size: 0.8rem; font-weight: 700;
+    color: var(--text-primary, #f1f5f9);
+    margin-bottom: 4px;
+}
+.fdb-schol-desc { font-size: 0.7rem; color: #94a3b8; line-height: 1.5; }
+
+/* ── Payment ─────────────────────────────────────────────── */
+.fdb-pay-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+.fdb-pay-card {
+    background: var(--card-bg, rgba(15,20,50,0.7));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.fdb-pay-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+.fdb-pay-icon { font-size: 1.6rem; margin-bottom: 8px; }
+.fdb-pay-title { font-size: 0.78rem; font-weight: 700; color: var(--text-primary, #f1f5f9); margin-bottom: 4px; }
+.fdb-pay-desc { font-size: 0.68rem; color: #94a3b8; line-height: 1.4; }
+
+/* ── Highlights ──────────────────────────────────────────── */
+.fdb-highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+.fdb-highlight-card {
+    background: var(--card-bg, rgba(15,20,50,0.7));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 1.1rem;
+    cursor: default;
+    transition: box-shadow 0.22s;
+}
+.fdb-highlight-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,.3); border-color: rgba(255,255,255,.14); }
+.fdb-highlight-icon { font-size: 1.5rem; margin-bottom: 8px; }
+.fdb-highlight-title { font-size: 0.82rem; font-weight: 700; color: var(--text-primary, #f1f5f9); margin-bottom: 4px; }
+.fdb-highlight-desc { font-size: 0.7rem; color: #94a3b8; line-height: 1.5; }
+
+/* ── Placement stats ─────────────────────────────────────── */
+.fdb-placement-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 20px;
+}
+.fdb-stat-badge {
+    flex: 1;
+    background: var(--card-bg, rgba(15,20,50,0.7));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid var(--sc, #6366f1);
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+}
+.fdb-stat-icon { font-size: 1.4rem; margin-bottom: 6px; }
+.fdb-stat-val { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 900; margin-bottom: 3px; }
+.fdb-stat-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #64748b; }
+
+/* Chips */
+.fdb-chip-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.fdb-chip {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+.fdb-chip--career {
+    border-color: rgba(100,116,139,0.4);
+    color: #94a3b8;
+    background: rgba(255,255,255,0.04);
+}
+
+/* ── Gallery ─────────────────────────────────────────────── */
+.fdb-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+.fdb-gallery-wrap {
+    position: relative;
+    height: 200px;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: zoom-in;
+}
+.fdb-gallery-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(1.05) contrast(1.08);
+    transition: transform 0.6s ease;
+    display: block;
+}
+.fdb-gallery-wrap:hover .fdb-gallery-img { transform: scale(1.09); }
+.fdb-gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(8,12,36,0.55) 100%);
+    pointer-events: none;
+}
+
+/* ── CTA ─────────────────────────────────────────────────── */
+.fdb-cta {
+    text-align: center;
+    padding: 40px 0 0;
+    border-top: 1px solid var(--border-color, rgba(255,255,255,0.07));
+}
+.fdb-cta-text { font-size: 0.88rem; color: #64748b; margin-bottom: 16px; }
+.fdb-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.fdb-cta-btn {
+    padding: 12px 28px;
+    border-radius: 999px;
+    border: none;
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.fdb-cta-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+.fdb-cta-btn--ghost {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #94a3b8;
+}
+.fdb-cta-btn--ghost:hover { color: #f1f5f9; border-color: rgba(255,255,255,0.4); }
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .fdb-summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .fdb-schol-grid   { grid-template-columns: repeat(2, 1fr); }
+    .fdb-pay-grid     { grid-template-columns: repeat(2, 1fr); }
+    .fdb-highlight-grid { grid-template-columns: repeat(2, 1fr); }
+    .fdb-gallery      { grid-template-columns: repeat(2, 1fr); }
+    .fdb-year-head, .fdb-year-row, .fdb-year-grand { font-size: 0.72rem; }
+    .fdb-hero-content { padding: 24px 20px; }
+    .fdb-placement-row { flex-direction: column; }
+}
+@media (max-width: 540px) {
+    .fdb-summary-grid { grid-template-columns: 1fr 1fr; }
+    .fdb-schol-grid   { grid-template-columns: 1fr; }
+    .fdb-pay-grid     { grid-template-columns: 1fr 1fr; }
+    .fdb-highlight-grid { grid-template-columns: 1fr; }
+    .fdb-gallery      { grid-template-columns: 1fr; }
+    .fdb-hero         { height: 280px; }
+    .fdb-body         { padding: 24px 14px 48px; }
+}
