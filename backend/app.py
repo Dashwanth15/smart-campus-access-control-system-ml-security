@@ -64,17 +64,23 @@ from campus_routes import campus_bp
 # =========================
 app = Flask(__name__)
 
-# CORS — dev origins always allowed; add Render frontend via env var
-_frontend_url = os.getenv("FRONTEND_URL", "").strip().rstrip("/")
-_cors_origins  = [
-    "http://localhost:5173", "http://localhost:3000",
-    "http://127.0.0.1:5173", "http://127.0.0.1:3000",
+# CORS — reads FRONTEND_URL from environment (set in Render dashboard)
+# Trailing slash is stripped so both forms of the URL match correctly.
+_raw_frontend = os.getenv("FRONTEND_URL", "")
+_allowed_origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:3000",
+    "https://smart-campus-access-control-system-ml.onrender.com",  # production
 ]
-if _frontend_url:
-    _cors_origins.append(_frontend_url)
+# Also add the env var dynamically (handles any future domain changes)
+_env_origin = _raw_frontend.strip().rstrip("/")
+if _env_origin and _env_origin not in _allowed_origins:
+    _allowed_origins.append(_env_origin)
 
 CORS(app,
-     origins=_cors_origins,
+     origins=_allowed_origins,
      supports_credentials=True,
      allow_headers=["Content-Type", "Authorization"],
      methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
