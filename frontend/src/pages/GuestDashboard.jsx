@@ -52,22 +52,26 @@ Contact: admissions@smartcampus.edu | +91 1234 567 890
 
 Reply in a concise, friendly tone. Use bullet points for lists. Keep answers under 150 words.`;
 
-    // Core fetch helper — AbortController timeout + throws on non-ok
+    // Core fetch helper — AbortController timeout via CancelToken + throws on non-ok
     const fetchReply = async (payload, timeoutMs = 15000) => {
         const ctrl = new AbortController();
         const timer = setTimeout(() => ctrl.abort(), timeoutMs);
         try {
-            const res = await fetch('http://localhost:5000/api/campus/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
+            const res = await API.post('/api/campus/chat', payload, {
                 signal: ctrl.signal,
             });
-            if (!res.ok) {
-                const err = await res.json().catch(() => ({}));
-                throw new Error(err.error || `Server error ${res.status}`);
+            return res.data;
+        } catch (err) {
+            // Rethrow AbortError as-is so the retry logic in send() can detect it
+            if (err.name === 'AbortError' || err.code === 'ERR_CANCELED') {
+                const abortErr = new Error('Request timed out');
+                abortErr.name = 'AbortError';
+                throw abortErr;
             }
-            return await res.json();
+            // Surface server-side error messages, or rethrow
+            const status = err.response?.status;
+            const msg = err.response?.data?.error;
+            throw new Error(msg || (status ? `Server error ${status}` : err.message));
         } finally {
             clearTimeout(timer);
         }

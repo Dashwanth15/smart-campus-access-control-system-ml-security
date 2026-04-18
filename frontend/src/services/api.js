@@ -1,7 +1,22 @@
 import axios from 'axios';
 
+// VITE_API_URL is injected at BUILD TIME by Vite from your .env / Render env vars.
+// It must start with VITE_ to be exposed to the browser bundle.
+// Local dev: create frontend/.env.local → VITE_API_URL=http://localhost:5000
+// Production (Render): set VITE_API_URL in the Static Site → Environment tab.
+const API_URL = import.meta.env.VITE_API_URL;
+
+if (!API_URL) {
+  // Warn loudly in development; in production this means the env var was not set at build time.
+  console.warn(
+    '[api.js] VITE_API_URL is not set. ' +
+    'For local dev, create frontend/.env.local with VITE_API_URL=http://localhost:5000. ' +
+    'For Render, add VITE_API_URL in the Static Site environment variables and redeploy.'
+  );
+}
+
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json'
   }
