@@ -167,22 +167,33 @@ Both models are trained on login behavior features (device familiarity, failed a
 ## 📸 Screenshots
 
 ### 🏠 Landing Page
-> *[Screenshot: Landing page with campus overview and role-based entry points]*
+
+![Landing Page 1](assets/screenshots/landing1.png)
+![Landing Page 2](assets/screenshots/landing2.png)
 
 ---
 
 ### 🔐 Login & Device Verification
-> *[Screenshot: Login form with device fingerprint status indicator]*
+
+![Login & Device Verification](assets/screenshots/login.png)
 
 ---
 
 ### 📊 Admin Security Dashboard
-> *[Screenshot: Real-time login analytics, risk scores, and intrusion alerts]*
+
+![Admin Dashboard](assets/screenshots/admin-dashboard.png)
 
 ---
 
 ### 📱 Device Monitoring Panel
-> *[Screenshot: Per-user device history with fingerprint hashes and risk scores]*
+
+![Device Monitoring](assets/screenshots/device-monitor.png)
+
+---
+
+### 💬 AI Campus Assistant
+
+![AI Assistant](assets/screenshots/ai-assistant.png)
 
 ---
 
