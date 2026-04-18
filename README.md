@@ -20,6 +20,7 @@
 - [Demo Credentials](#-demo-credentials)
 - [Project Structure](#-project-structure)
 - [Challenges & Learnings](#-challenges--learnings)
+- [Real-World Applications](#-real-world-applications)
 
 ---
 
@@ -102,7 +103,7 @@ Every login generates a **risk score from 0–100** based on:
 ### 🔒 Automated Lockout System
 
 | Trigger | Action |
-|--------|--------|
+|---------|--------|
 | 3 failed attempts | 8-hour automatic block |
 | Repeated violations | Permanent block |
 | Manual review | Admin unblock |
@@ -168,37 +169,32 @@ Both models are trained on login behavior features (device familiarity, failed a
 
 ### 🏠 Landing Page
 
-![Landing Page 1](assets/screenshots/landing1.png)
-![Landing Page 2](assets/screenshots/landing2.png)
+![Landing Page 1](frontend/src/assets/Screenshots/landing1.png)
+![Landing Page 2](frontend/src/assets/Screenshots/landing2.png)
 
 ---
 
 ### 🔐 Login & Device Verification
 
-![Login & Device Verification](assets/screenshots/login.png)
+![Login & Device Verification](frontend/src/assets/Screenshots/login.png.png)
 
 ---
 
 ### 📊 Admin Security Dashboard
 
-![Admin Dashboard](assets/screenshots/admin-dashboard.png)
+![Admin Dashboard](frontend/src/assets/Screenshots/admin-dashboard.png.png)
 
 ---
 
 ### 📱 Device Monitoring Panel
 
-![Device Monitoring](assets/screenshots/device-monitor.png)
+![Device Monitoring](frontend/src/assets/Screenshots/device-monitor.png)
 
 ---
 
 ### 💬 AI Campus Assistant
 
-![AI Assistant](assets/screenshots/ai-assistant.png)
-
----
-
-### 💬 AI Campus Assistant
-> *[Screenshot: Guest chatbot interface with campus FAQ interaction]*
+![AI Assistant](frontend/src/assets/Screenshots/ai-assistant.png.png)
 
 ---
 
