@@ -4,6 +4,8 @@
 
 🔗 **Live Demo:** [smart-campus-access-control-system-ml.onrender.com](https://smart-campus-access-control-system-ml.onrender.com/)
 
+🎥 **Demo Video:** [Watch Demo](https://drive.google.com/file/d/1Wu8SOF-xqFzxPmigqPciudem1CRCBeAp/view)
+
 ---
 
 ## 🧭 Table of Contents
